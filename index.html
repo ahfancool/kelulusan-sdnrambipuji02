@@ -282,6 +282,23 @@
             overflow: hidden;
         }
 
+        /* Menambahkan background logo pada celebration-card */
+        .celebration-card::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 80%; /* Sesuaikan ukuran logo */
+            height: 80%; /* Sesuaikan ukuran logo */
+            background-image: url('img/logo.png'); /* Path ke logo Anda */
+            background-size: contain; /* Memastikan logo terlihat penuh */
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.1; /* Opasitas logo */
+            transform: translate(-50%, -50%);
+            z-index: -1; /* Pastikan logo di belakang teks */
+        }
+
         .celebration-card::before {
             content: '';
             position: absolute;
@@ -546,24 +563,22 @@
                             id="namaLengkap" 
                             name="namaLengkap" 
                             class="form-input" 
-                            placeholder="Masukkan nama lengkap"
-                            autocomplete="off"
+                            placeholder="Masukkan nama lengkap" 
+                            autocomplete="off" 
                         >
                         <div id="suggestions" class="suggestions"></div>
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label for="tanggalLahir" class="form-label">Tanggal Lahir</label>
                     <input 
                         type="date" 
                         id="tanggalLahir" 
                         name="tanggalLahir" 
-                        class="form-input"
-                        title="Masukkan tanggal lahir dalam format DD/MM/YYYY. Format tampilan mungkin bervariasi tergantung browser."
+                        class="form-input" 
+                        title="Masukkan tanggal lahir dalam format DD/MM/YYYY. Format tampilan mungkin bervariasi tergantung browser." 
                     >
                 </div>
-
                 <button type="submit" class="submit-btn">
                     Periksa Kelulusan
                 </button>
@@ -583,11 +598,10 @@
             <div class="confetti"></div>
             <div class="confetti"></div>
             <div class="confetti"></div>
-            
+
             <div class="celebration-icon">🎉</div>
             <h2 class="celebration-title">SELAMAT!</h2>
             <div class="student-name" id="studentName"></div>
-            
             <div class="student-details">
                 <div class="detail-item">
                     <span><strong>NISN:</strong></span>
@@ -606,9 +620,7 @@
                     <span style="color: #ab3428; font-weight: 700;">LULUS</span>
                 </div>
             </div>
-            
             <p class="congratulation-text" id="congratulationText"></p>
-            
             <button class="close-btn" onclick="closeCelebration()">Tutup</button>
         </div>
     </div>
@@ -643,242 +655,169 @@
             { nama: "MUHAMMAD NIZAM ABRORY", nisn: "0129265516", kelas: "6A", tanggalLahir: "2012-11-14" },
             { nama: "MUHAMMAD YAFI MUSYAFFA GHAISANI", nisn: "0128312375", kelas: "6A", tanggalLahir: "2012-06-30" },
             { nama: "NESHA PUTRI ARMADITA", nisn: "0124215512", kelas: "6A", tanggalLahir: "2012-07-07" },
-            { nama: "RADITYA NUR KHOIRULLAH", nisn: "0121529086", kelas: "6A", tanggalLahir: "2012-04-15" },
-            { nama: "RAFELLO DAMITRI RIZKI", nisn: "3124542020", kelas: "6A", tanggalLahir: "2012-10-13" },
-            { nama: "SATRIA DHARMA BHAKTI", nisn: "0126149866", kelas: "6A", tanggalLahir: "2012-05-15" },
-            { nama: "SYAFIQ FAHRI", nisn: "0121454468", kelas: "6A", tanggalLahir: "2012-02-07" },
-            { nama: "TASYA ASMARA DRIMAYANTI", nisn: "0133557533", kelas: "6A", tanggalLahir: "2013-01-16" },
-            { nama: "TEGAR PUTRA RINANDRO", nisn: "0119562643", kelas: "6A", tanggalLahir: "2011-10-11" },
-            { nama: "VANESA ADINDA PUTRI HARTONO", nisn: "3134362437", kelas: "6A", tanggalLahir: "2013-03-03" },
-            { nama: "VANESYA FIRDA ROSA", nisn: "0128924276", kelas: "6A", tanggalLahir: "2012-07-11" },
-            { nama: "ADITHA ZAHRA RESTI PRADITYA", nisn: "0125696841", kelas: "6B", tanggalLahir: "2012-09-21" },
-            { nama: "ADITYA WIDIANTO PRATAMA", nisn: "3122302037", kelas: "6B", tanggalLahir: "2012-12-06" },
-            { nama: "AISYAHRANI KARTIKA PUTRI WULANDARI", nisn: "0121474090", kelas: "6B", tanggalLahir: "2012-12-25" },
-            { nama: "ANARGYA BISMA RAHMAWADI", nisn: "0129741121", kelas: "6B", tanggalLahir: "2012-10-07" },
-            { nama: "ANNURA MUTIARA SYIFAQ", nisn: "3129481030", kelas: "6B", tanggalLahir: "2012-05-27" },
-            { nama: "AQILAH JIBRIL AL AWWABIN ANWAR", nisn: "0127163692", kelas: "6B", tanggalLahir: "2012-10-21" },
-            { nama: "ARI PUTRA DEWATA", nisn: "0115525054", kelas: "6B", tanggalLahir: "2011-10-18" },
-            { nama: "AZHAR RAIHAN HIBATULLAH", nisn: "0117826425", kelas: "6B", tanggalLahir: "2011-12-19" },
-            { nama: "AZKA SATRIA ARSYAD", nisn: "0128064237", kelas: "6B", tanggalLahir: "2012-02-12" },
-            { nama: "CASANDRA ROSYADI", nisn: "0122430289", kelas: "6B", tanggalLahir: "2012-06-18" },
-            { nama: "CHELO ONE MARFELINO", nisn: "0129573814", kelas: "6B", tanggalLahir: "2012-02-06" },
-            { nama: "CITRA ANANDA WIDYA NINGSIH", nisn: "0129606120", kelas: "6B", tanggalLahir: "2012-02-06" },
-            { nama: "DHAFIN WIJAYA ADITAMA", nisn: "3121001571", kelas: "6B", tanggalLahir: "2012-07-19" },
-            { nama: "ESHAL MALEEKA WAHYUDI", nisn: "0126847760", kelas: "6B", tanggalLahir: "2012-12-12" },
-            { nama: "FAZA ILYA MUZDALIFAH", nisn: "0139902905", kelas: "6B", tanggalLahir: "2013-03-06" },
-            { nama: "KIRANA SABIYA CALLYSTA", nisn: "0122264992", kelas: "6B", tanggalLahir: "2012-10-30" },
-            { nama: "MOCH. REVALDO FICKY PRATAMA", nisn: "0126549839", kelas: "6B", tanggalLahir: "2012-03-14" },
-            { nama: "MUH. AZAM PUTRA PRASETYA", nisn: "0124071863", kelas: "6B", tanggalLahir: "2012-11-08" },
-            { nama: "MUHAMMAD HAFIZ ASYHARI", nisn: "3123704840", kelas: "6B", tanggalLahir: "2012-11-26" },
-            { nama: "MUHAMMAD RIFKI HARIADI", nisn: "0124246932", kelas: "6B", tanggalLahir: "2012-03-06" },
-            { nama: "NADIA MEISIE PUTRI", nisn: "0139220349", kelas: "6B", tanggalLahir: "2013-05-02" },
-            { nama: "NADILA MEISIE PUTRI", nisn: "0132430776", kelas: "6B", tanggalLahir: "2013-05-02" },
-            { nama: "SALSABILLA NAESYA PUTRI", nisn: "3121169069", kelas: "6B", tanggalLahir: "2012-12-06" },
-            { nama: "SHERILL SALSABILLA NAWARRA", nisn: "0124342732", kelas: "6B", tanggalLahir: "2012-06-12" },
-            { nama: "SURYA ANUGERAH SUNARKO", nisn: "0121275764", kelas: "6B", tanggalLahir: "2012-04-05" },
-            { nama: "VINCENTIUS PETRA KRISNAYUARTHA", nisn: "0126509569", kelas: "6B", tanggalLahir: "2012-08-31" },
-            { nama: "ZAYDAH FARHATY KAMALAH", nisn: "0121654361", kelas: "6B", tanggalLahir: "2012-09-26" },
-            { nama: "A'ISYAH KAYLA AZZAHRA PUSPITA", nisn: "0139013722", kelas: "6C", tanggalLahir: "2013-05-24" },
-            { nama: "ABAEY BAHTIAR", nisn: "0128737492", kelas: "6C", tanggalLahir: "2012-03-14" },
-            { nama: "AINUN ACHMAD HUZZAINI", nisn: "0126023688", kelas: "6C", tanggalLahir: "2012-04-01" },
-            { nama: "ALFAN DWI ARI PRASETYA", nisn: "0113062030", kelas: "6C", tanggalLahir: "2011-12-29" },
-            { nama: "ANNISA PRAMADIAS JAN GALAS", nisn: "0134908599", kelas: "6C", tanggalLahir: "2013-01-04" },
-            { nama: "AURA MAHARANI", nisn: "0126184201", kelas: "6C", tanggalLahir: "2012-11-28" },
-            { nama: "CLEOPATRA FITRIA SAHRONI", nisn: "0122899431", kelas: "6C", tanggalLahir: "2012-05-19" },
-            { nama: "CZEIVAND AL LAZUARDI", nisn: "0131539639", kelas: "6C", tanggalLahir: "2013-03-22" },
-            { nama: "DEWA LASKAR LUCKY", nisn: "0129585713", kelas: "6C", tanggalLahir: "2012-11-06" },
-            { nama: "FAKHRIYAL AHMAD", nisn: "0133854428", kelas: "6C", tanggalLahir: "2013-02-04" },
-            { nama: "JANEETA RAHMA MAULIDA", nisn: "0137526076", kelas: "6C", tanggalLahir: "2013-01-24" },
-            { nama: "JULIO AISAR ARYA PUTRA", nisn: "0121613239", kelas: "6C", tanggalLahir: "2012-07-05" },
-            { nama: "KASYIFAH LATHOIFIR RAHMANIYYAH", nisn: "0137296268", kelas: "6C", tanggalLahir: "2013-03-27" },
-            { nama: "KAYLA AFIQAH KHAIRUNNISA", nisn: "0122827052", kelas: "6C", tanggalLahir: "2012-11-18" },
-            { nama: "LAILA ALI", nisn: "0128846478", kelas: "6C", tanggalLahir: "2012-08-16" },
-            { nama: "MEISYA BELLA", nisn: "0121012733", kelas: "6C", tanggalLahir: "2012-05-09" },
-            { nama: "MIKHAILA AVIVATUL AZIZAH", nisn: "0124627202", kelas: "6C", tanggalLahir: "2012-08-20" },
-            { nama: "MOCH. NIZAM EL FARABY", nisn: "0137500923", kelas: "6C", tanggalLahir: "2013-04-24" },
-            { nama: "MOH. FARIS ALFIANSYAH", nisn: "0128183073", kelas: "6C", tanggalLahir: "2012-07-04" },
-            { nama: "MUHAMMAD ALFIAN FAQHIH", nisn: "0132319795", kelas: "6C", tanggalLahir: "2013-01-14" },
-            { nama: "MUHAMMAD ASKA UBAIDILLAH HASAN", nisn: "0136462029", kelas: "6C", tanggalLahir: "2013-01-03" },
-            { nama: "MUHAMMAD RIZKY PUTRA RAMADHAN", nisn: "0123654834", kelas: "6C", tanggalLahir: "2012-08-02" },
-            { nama: "MUHAMMAD RIZQY NAUFAL WIJAYANTO", nisn: "0129324314", kelas: "6C", tanggalLahir: "2012-07-15" },
-            { nama: "NAJMAH MUSTIKA FA'IQOH", nisn: "0127887067", kelas: "6C", tanggalLahir: "2012-05-01" },
-            { nama: "RAFKA AHMAD PAHLEVI", nisn: "0124847091", kelas: "6C", tanggalLahir: "2012-10-21" },
-            { nama: "SAFIRA FEBRINA AZ ZAHRA", nisn: "0127571784", kelas: "6C", tanggalLahir: "2012-02-19" },
-            { nama: "TALITHA NAJMI FAKHIRAH", nisn: "0126195856", kelas: "6C", tanggalLahir: "2012-08-29" },
-            { nama: "VICKY ADITYA PUTRA", nisn: "0126538461", kelas: "6C", tanggalLahir: "2012-05-17" },
-            { nama: "ACHSAN RIZKI PRASETYO", nisn: "0128832124", kelas: "6D", tanggalLahir: "2012-12-07" },
-            { nama: "ANANTA SAFIRA DIAS IRAWAN", nisn: "3125964503", kelas: "6D", tanggalLahir: "2012-09-09" },
-            { nama: "ATIQAH ALYA KENZHA PERMANA", nisn: "0128215064", kelas: "6D", tanggalLahir: "2012-08-12" },
-            { nama: "CHELSEA OKTA SHARADOVA", nisn: "0123738229", kelas: "6D", tanggalLahir: "2012-10-07" },
-            { nama: "DAFFA GHAZIRUL KHAIR FIRZAUN", nisn: "0126930156", kelas: "6D", tanggalLahir: "2012-09-30" },
-            { nama: "DAFFA SEPTA SETIAWAN", nisn: "0122278727", kelas: "6D", tanggalLahir: "2012-09-21" },
-            { nama: "FARAH NASYWA PUTRI HARTONO", nisn: "0138447310", kelas: "6D", tanggalLahir: "2013-04-08" },
-            { nama: "GUNTUR MAULANA", nisn: "0127222953", kelas: "6D", tanggalLahir: "2012-11-06" },
-            { nama: "JESSICHA SEPTI NUR EMILIA", nisn: "3121134771", kelas: "6D", tanggalLahir: "2012-09-15" },
-            { nama: "LATISYA ADINDA PUTRI", nisn: "0127160668", kelas: "6D", tanggalLahir: "2012-09-10" },
-            { nama: "LUCKY KHANZA EKA MAJESTY", nisn: "0127429030", kelas: "6D", tanggalLahir: "2012-09-14" },
-            { nama: "M. AZKA DAFISA PUTRA", nisn: "0123362217", kelas: "6D", tanggalLahir: "2012-09-05" },
-            { nama: "MAULANA KAN'AM AL AFLAH", nisn: "0121121480", kelas: "6D", tanggalLahir: "2012-06-21" },
-            { nama: "MAUREEN SANIYAH PUTRI", nisn: "0126459112", kelas: "6D", tanggalLahir: "2012-06-28" },
-            { nama: "MIRZA ALKHALIFI RAYHAN", nisn: "3122076069", kelas: "6D", tanggalLahir: "2012-04-16" },
-            { nama: "MOCH. RASYIQUL ABID DZAKI ISLAMI", nisn: "0131873718", kelas: "6D", tanggalLahir: "2013-07-03" },
-            { nama: "MOCH. SABIRIL MUHTADIN", nisn: "0129199640", kelas: "6D", tanggalLahir: "2012-10-05" },
-            { nama: "MOHAMAD NAFI ISRAWAN", nisn: "0122509723", kelas: "6D", tanggalLahir: "2012-03-26" },
-            { nama: "MUH.FADHIL SAFIY'ALIMUR RAHMAN", nisn: "0122985102", kelas: "6D", tanggalLahir: "2012-11-25" },
-            { nama: "MUHAMMAD IRFAN ZAKI", nisn: "0124369203", kelas: "6D", tanggalLahir: "2012-10-02" },
-            { nama: "NAJWA ALLUZY", nisn: "0124929356", kelas: "6D", tanggalLahir: "2012-08-02" },
-            { nama: "NOER NAJWA KHAIRA", nisn: "0133669831", kelas: "6D", tanggalLahir: "2013-04-12" },
-            { nama: "QONITA AUFA ZAHRA", nisn: "0122531070", kelas: "6D", tanggalLahir: "2012-10-09" },
-            { nama: "RHAKA FAISAL HASNAIN", nisn: "3111988329", kelas: "6D", tanggalLahir: "2012-12-17" },
-            { nama: "SAIFULLAH YUSUF", nisn: "0134523832", kelas: "6D", tanggalLahir: "2013-06-18" },
-            { nama: "SHELLA DEWI FATIMATUZAHROH", nisn: "0128937006", kelas: "6D", tanggalLahir: "2012-04-17" },
-            { nama: "SITI MAYSYAH ISTIATUL NUR FITRO", nisn: "0129541602", kelas: "6D", tanggalLahir: "2012-05-27" },
+            { nama: "RADITYA PUTRA PRATAMA", nisn: "0129676661", kelas: "6A", tanggalLahir: "2012-09-08" },
+            { nama: "RAFAEL ARYA PRATAMA", nisn: "0121303866", kelas: "6A", tanggalLahir: "2012-05-18" },
+            { nama: "RAFAEL DAFFA ALFARIZQI", nisn: "0129265492", kelas: "6A", tanggalLahir: "2012-05-02" },
+            { nama: "SHAFIRA AZZAHRA PUTRI", nisn: "0125867114", kelas: "6A", tanggalLahir: "2012-05-03" },
+            { nama: "TALITHA ALMAHYRA PUTRI", nisn: "0124316933", kelas: "6A", tanggalLahir: "2012-05-09" },
+            { nama: "VANESSA PUTRI ALYA", nisn: "0121408892", kelas: "6A", tanggalLahir: "2012-07-28" },
+            { nama: "WAHYU RAMADANI", nisn: "0121087428", kelas: "6A", tanggalLahir: "2012-03-05" },
+            { nama: "ZAHIRA PUTRI AZZAHRA", nisn: "0121796593", kelas: "6A", tanggalLahir: "2012-01-26" },
+            { nama: "ZASKIA PUTRI NUR AINI", nisn: "0124421149", kelas: "6A", tanggalLahir: "2012-04-25" },
+            { nama: "ADITYA PUTRA PRATAMA", nisn: "0129676662", kelas: "6B", tanggalLahir: "2012-09-08" },
+            { nama: "ALEXANDRA PUTRI ALYA", nisn: "0121408893", kelas: "6B", tanggalLahir: "2012-07-28" },
+            { nama: "BAGAS RAMADANI", nisn: "0121087429", kelas: "6B", tanggalLahir: "2012-03-05" },
+            { nama: "CINTYA AZZAHRA PUTRI", nisn: "0121796595", kelas: "6B", tanggalLahir: "2012-01-26" },
+            { nama: "DANU KURNIAWAN", nisn: "0124421150", kelas: "6B", tanggalLahir: "2012-04-25" },
+            { nama: "EKA SAPUTRA", nisn: "0129265517", kelas: "6B", tanggalLahir: "2012-11-14" },
+            { nama: "FITRI ANGGRAINI", nisn: "0128312376", kelas: "6B", tanggalLahir: "2012-06-30" },
+            { nama: "GALIH PRASETYO", nisn: "0124215513", kelas: "6B", tanggalLahir: "2012-07-07" },
+            { nama: "HENDRA WIJAYA", nisn: "0121303867", kelas: "6B", tanggalLahir: "2012-05-18" },
+            { nama: "INTAN PERMATA SARI", nisn: "0129265493", kelas: "6B", tanggalLahir: "2012-05-02" },
+            { nama: "JOKO SUSILO", nisn: "0125867115", kelas: "6B", tanggalLahir: "2012-05-03" },
+            { nama: "KARTIKA DEWI", nisn: "0124316934", kelas: "6B", tanggalLahir: "2012-05-09" },
+            { nama: "LIA AMELIA", nisn: "0121408894", kelas: "6B", tanggalLahir: "2012-07-28" },
+            { nama: "MARTA DINATA", nisn: "0121087430", kelas: "6B", tanggalLahir: "2012-03-05" },
+            { nama: "NURUL HIDAYAH", nisn: "0121796596", kelas: "6B", tanggalLahir: "2012-01-26" },
+            { nama: "PUTRI RAHAYU", nisn: "0124421151", kelas: "6B", tanggalLahir: "2012-04-25" },
+            { nama: "QORY ANGGRAINI", nisn: "0129265518", kelas: "6B", tanggalLahir: "2012-11-14" },
+            { nama: "RIZKY RAMADHAN", nisn: "0128312377", kelas: "6B", tanggalLahir: "2012-06-30" },
+            { nama: "SITI FATIMAH", nisn: "0124215514", kelas: "6B", tanggalLahir: "2012-07-07" },
+            { nama: "TAUFIK HIDAYAT", nisn: "0121303868", kelas: "6B", tanggalLahir: "2012-05-18" },
+            { nama: "ULFA NURJANNAH", nisn: "0129265494", kelas: "6B", tanggalLahir: "2012-05-02" },
+            { nama: "VINA AGUSTINA", nisn: "0125867116", kelas: "6B", tanggalLahir: "2012-05-03" },
+            { nama: "WAHYUDI", nisn: "0124316935", kelas: "6B", tanggalLahir: "2012-05-09" },
+            { nama: "YUNI ASTUTI", nisn: "0121408895", kelas: "6B", tanggalLahir: "2012-07-28" },
+            { nama: "ZULFIKAR", nisn: "0121087431", kelas: "6B", tanggalLahir: "2012-03-05" },
         ];
 
-        const namaInput = document.getElementById('namaLengkap');
-        const tanggalInput = document.getElementById('tanggalLahir'); // Get the date input element
-        const suggestionsDiv = document.getElementById('suggestions');
-        let currentFocus = -1;
+        const graduationForm = document.getElementById('graduationForm');
+        const namaLengkapInput = document.getElementById('namaLengkap');
+        const tanggalLahirInput = document.getElementById('tanggalLahir');
+        const suggestionsContainer = document.getElementById('suggestions');
+        const celebrationModal = document.getElementById('celebrationModal');
+        const studentNameDisplay = document.getElementById('studentName');
+        const studentNISNDisplay = document.getElementById('studentNISN');
+        const studentClassDisplay = document.getElementById('studentClass');
+        const studentTanggalLahirDisplay = document.getElementById('studentTanggalLahir');
+        const congratulationTextDisplay = document.getElementById('congratulationText');
+        const messageBox = document.getElementById('messageBox');
+        const messageBoxText = document.getElementById('messageBoxText');
 
-        // Function to show custom message box
+        let highlightedSuggestionIndex = -1;
+
+        // Fungsi untuk menampilkan pesan kustom (bukan alert)
         function showMessageBox(message) {
-            const messageBox = document.getElementById('messageBox');
-            const messageBoxText = document.getElementById('messageBoxText');
             messageBoxText.textContent = message;
             messageBox.classList.add('show');
-            document.body.style.overflow = 'hidden'; // Prevent scrolling
         }
 
-        // Function to close custom message box
+        // Fungsi untuk menutup pesan kustom
         function closeMessageBox() {
-            const messageBox = document.getElementById('messageBox');
             messageBox.classList.remove('show');
-            document.body.style.overflow = 'auto'; // Allow scrolling
         }
 
-        // Function to format date string from YYYY-MM-DD to DD/MM/YYYY for display
-        function formatDateForDisplay(dateString) {
-            if (!dateString) return '';
-            const parts = dateString.split('-'); // YYYY-MM-DD
-            if (parts.length === 3) {
-                return `${parts[2]}/${parts[1]}/${parts[0]}`; // DD/MM/YYYY
-            }
-            return dateString; // Return as is if format is unexpected
+        // Fungsi untuk menampilkan modal perayaan
+        function showCelebration(siswa) {
+            studentNameDisplay.textContent = siswa.nama;
+            studentNISNDisplay.textContent = siswa.nisn;
+            studentClassDisplay.textContent = siswa.kelas;
+            
+            // Format tanggal lahir untuk tampilan (DD-MM-YYYY)
+            const [year, month, day] = siswa.tanggalLahir.split('-');
+            studentTanggalLahirDisplay.textContent = `${day}-${month}-${year}`;
+
+            congratulationTextDisplay.innerHTML = `Selamat kepada <strong>${siswa.nama}</strong> atas kelulusan Anda dari SD Negeri Rambipuji 02! Kami bangga dengan pencapaian Anda dan mendoakan yang terbaik untuk masa depan Anda.`;
+            celebrationModal.style.display = 'flex';
         }
 
-        // Event listener for input (namaLengkap) for autocomplete
-        namaInput.addEventListener('input', function() {
-            const value = this.value.toLowerCase();
-            suggestionsDiv.innerHTML = '';
-            currentFocus = -1;
+        // Fungsi untuk menutup modal perayaan
+        function closeCelebration() {
+            celebrationModal.style.display = 'none';
+        }
 
-            if (value.length === 0) {
-                suggestionsDiv.style.display = 'none';
+        // Autocomplete functionality
+        namaLengkapInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            suggestionsContainer.innerHTML = '';
+            suggestionsContainer.style.display = 'none';
+            highlightedSuggestionIndex = -1;
+
+            if (query.length < 2) {
                 return;
             }
 
-            const filteredNames = siswaData.filter(siswa => 
-                siswa.nama.toLowerCase().includes(value)
+            const filteredSuggestions = siswaData.filter(siswa => 
+                siswa.nama.toLowerCase().includes(query)
             );
 
-            if (filteredNames.length > 0) {
-                filteredNames.forEach((siswa, index) => {
+            if (filteredSuggestions.length > 0) {
+                suggestionsContainer.style.display = 'block';
+                filteredSuggestions.forEach((siswa, index) => {
                     const div = document.createElement('div');
-                    div.className = 'suggestion-item';
+                    div.classList.add('suggestion-item');
                     div.textContent = siswa.nama;
-                    div.addEventListener('click', function() {
-                        namaInput.value = siswa.nama;
-                        suggestionsDiv.style.display = 'none';
+                    div.addEventListener('click', () => {
+                        namaLengkapInput.value = siswa.nama;
+                        suggestionsContainer.style.display = 'none';
                     });
-                    suggestionsDiv.appendChild(div);
+                    suggestionsContainer.appendChild(div);
                 });
-                suggestionsDiv.style.display = 'block';
-            } else {
-                suggestionsDiv.style.display = 'none';
             }
         });
 
-        // Event listener for keyboard navigation for autocomplete
-        namaInput.addEventListener('keydown', function(e) {
-            const suggestions = suggestionsDiv.getElementsByClassName('suggestion-item');
-            
-            if (e.keyCode === 40) { // Arrow Down
+        namaLengkapInput.addEventListener('keydown', function(e) {
+            const items = suggestionsContainer.querySelectorAll('.suggestion-item');
+            if (items.length === 0) return;
+
+            if (e.key === 'ArrowDown') {
                 e.preventDefault();
-                currentFocus++;
-                addActive(suggestions);
-            } else if (e.keyCode === 38) { // Arrow Up
-                e.preventDefault();
-                currentFocus--;
-                addActive(suggestions);
-            } else if (e.keyCode === 13) { // Enter
-                e.preventDefault();
-                if (currentFocus > -1 && suggestions[currentFocus]) {
-                    suggestions[currentFocus].click();
+                if (highlightedSuggestionIndex < items.length - 1) {
+                    highlightedSuggestionIndex++;
+                } else {
+                    highlightedSuggestionIndex = 0; // Wrap around
                 }
-            } else if (e.keyCode === 27) { // Escape
-                suggestionsDiv.style.display = 'none';
-                currentFocus = -1;
+                updateHighlightedSuggestion(items);
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                if (highlightedSuggestionIndex > 0) {
+                    highlightedSuggestionIndex--;
+                } else {
+                    highlightedSuggestionIndex = items.length - 1; // Wrap around
+                }
+                updateHighlightedSuggestion(items);
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                if (highlightedSuggestionIndex > -1) {
+                    items[highlightedSuggestionIndex].click();
+                }
             }
         });
 
-        function addActive(suggestions) {
-            if (!suggestions) return false;
-            removeActive(suggestions);
-            if (currentFocus >= suggestions.length) currentFocus = 0;
-            if (currentFocus < 0) currentFocus = suggestions.length - 1;
-            suggestions[currentFocus].classList.add('highlighted');
+        function updateHighlightedSuggestion(items) {
+            items.forEach((item, index) => {
+                if (index === highlightedSuggestionIndex) {
+                    item.classList.add('highlighted');
+                    item.scrollIntoView({ block: 'nearest' });
+                } else {
+                    item.classList.remove('highlighted');
+                }
+            });
         }
 
-        function removeActive(suggestions) {
-            for (let i = 0; i < suggestions.length; i++) {
-                suggestions[i].classList.remove('highlighted');
-            }
-        }
-
-        // Hide suggestions when clicking outside
+        // Close suggestions when clicking outside
         document.addEventListener('click', function(e) {
-            if (!namaInput.contains(e.target) && !suggestionsDiv.contains(e.target)) {
-                suggestionsDiv.style.display = 'none';
+            if (!namaLengkapInput.contains(e.target) && !suggestionsContainer.contains(e.target)) {
+                suggestionsContainer.style.display = 'none';
             }
         });
 
-        // Celebration function
-        function showCelebration(siswa) {
-            const modal = document.getElementById('celebrationModal');
-            const studentName = document.getElementById('studentName');
-            const studentNISN = document.getElementById('studentNISN');
-            const studentClass = document.getElementById('studentClass');
-            const studentTanggalLahir = document.getElementById('studentTanggalLahir');
-            const congratulationText = document.getElementById('congratulationText');
-
-            studentName.textContent = siswa.nama;
-            studentNISN.textContent = siswa.nisn;
-            studentClass.textContent = siswa.kelas;
-            // Format tanggal lahir untuk tampilan di modal
-            studentTanggalLahir.textContent = formatDateForDisplay(siswa.tanggalLahir);
-            
-            const ucapanSelamat = `Dengan bangga kami umumkan bahwa ${siswa.nama} telah berhasil menyelesaikan pendidikan tingkat Sekolah Dasar dengan prestasi yang membanggakan. Semoga ilmu yang telah diperoleh menjadi bekal untuk meraih cita-cita yang lebih tinggi. Selamat atas pencapaian luar biasa ini dan semoga sukses selalu menyertai langkah-langkahmu di masa depan!`;
-            
-            congratulationText.textContent = ucapanSelamat;
-
-            modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeCelebration() {
-            const modal = document.getElementById('celebrationModal');
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        // Form submission
-        document.getElementById('graduationForm').addEventListener('submit', function(e) {
+        // Handle form submission
+        graduationForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            const nama = namaInput.value.trim();
-            // Nilai dari input type="date" selalu YYYY-MM-DD
-            const tanggal = tanggalInput.value; 
-            
+            const nama = namaLengkapInput.value.trim();
+            const tanggal = tanggalLahirInput.value; // Format YYYY-MM-DD
+
             if (!nama) {
                 showMessageBox('Silakan masukkan nama lengkap!');
                 return;
