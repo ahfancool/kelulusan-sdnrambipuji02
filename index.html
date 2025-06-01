@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengumuman Kelulusan SD Negeri Kaliwining 03</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@404,604&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_blue.css">
+
+    <style>
+        :root {
+            --primary-blue: #007bff; /* Example blue, adjust as needed */
+            --light-gray: #f8f9fa; /* Background color for input card */
+            --dark-text: #343a40;
+            --grid-line-color: rgba(0, 0, 0, 0.05); /* Light grid lines */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e0f2f7; /* A light blue similar to the image background */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            color: var(--dark-text);
+            /* Grid background pattern */
+            background-image:
+                linear-gradient(to right, var(--grid-line-color) 1px, transparent 1px),
+                linear-gradient(to bottom, var(--grid-line-color) 1px, transparent 1px);
+            background-size: 20px 20px; /* Adjust grid size as needed */
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px 20px;
+        }
+
+        .logo-container {
+            width: 80px; /* Adjust size of the logo circle */
+            height: 80px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex; /* Gunakan flexbox untuk memusatkan gambar di dalamnya */
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            overflow: hidden; /* Penting: Potong jika gambar melebihi batas lingkaran */
+        }
+
+        /* Hapus atau abaikan .logo-text jika Anda sudah menghapus elemennya di HTML */
+        /* .logo-text {
+            font-weight: 600;
+            font-size: 0.7em;
+            color: var(--primary-blue);
+            text-align: center;
+            line-height: 1.2;
+        } */
+
+        .logo-image { /* Gaya baru untuk gambar logo */
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
+            object-fit: contain;
+            padding: 5px; /* Sesuaikan padding jika diperlukan agar logo pas di dalam lingkaran */
+        }
+
+        h1 {
+            font-size: 2.2em;
+            margin-bottom: 5px;
+            color: var(--dark-text);
+        }
+
+        h2 {
+            font-size: 1.2em;
+            font-weight: 400;
+            margin-top: 0;
+            color: #6c757d; /* Slightly muted text for the academic year */
+        }
+
+        main {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align to top of the flex container */
+            padding: 20px;
+        }
+
+        .card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 450px; /* Max width for desktop */
+            text-align: left;
+        }
+
+        .card h3 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1.3em;
+            color: var(--dark-text);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark-text);
+        }
+
+        .form-group input[type="text"],
+        .form-group .flatpickr-input { /* Apply the same styling to flatpickr input */
+            width: calc(100% - 20px); /* Account for padding */
+            padding: 12px 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            font-size: 1em;
+            box-sizing: border-box; /* Include padding in element's total width and height */
+            background-color: white; /* Ensure consistent background for Flatpickr */
+        }
+
+        .form-group input[type="text"]::placeholder {
+            color: #adb5bd;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px 20px;
+            background-color: #007bff; /* Primary blue button */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #6c757d;
+            font-size: 0.9em;
+            background-color: rgba(255, 255, 255, 0.5); /* Slightly transparent white for footer background */
+            margin-top: auto; /* Pushes footer to the bottom */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            h2 {
+                font-size: 1em;
+            }
+
+            .card {
+                padding: 25px;
+                margin: 0 15px; /* Add some side margin on smaller screens */
+            }
+
+            .logo-container { /* Sesuaikan ukuran container logo responsif */
+                width: 60px;
+                height: 60px;
+            }
+
+            /* Hapus .logo-text jika Anda sudah menghapus elemennya di HTML */
+            /* .logo-text {
+                font-size: 0.6em;
+            } */
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 30px 15px 15px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            h2 {
+                font-size: 0.9em;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .form-group label {
+                font-size: 0.95em;
+            }
+
+            .form-group input[type="text"],
+            .form-group .flatpickr-input {
+                padding: 10px;
+                font-size: 0.95em;
+            }
+
+            .btn {
+                padding: 12px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="path/to/your/logo.png" alt="Logo SD Negeri Kaliwining 03" class="logo-image">
+        </div>
+        <h1>PENGUMUMAN KELULUSAN</h1>
+        <h2>SD Negeri Kaliwining 03<br>Tahun Ajaran 2024/2025</h2>
+    </header>
+
+    <main>
+        <div class="card">
+            <h3>Silakan Masukkan Data Diri</h3>
+            <form action="#" method="POST">
+                <div class="form-group">
+                    <label for="namaLengkap">Nama Lengkap</label>
+                    <input type="text" id="namaLengkap" name="namaLengkap" placeholder="Masukkan nama lengkap" required>
+                </div>
+                <div class="form-group">
+                    <label for="tanggalLahir">Tanggal Lahir</label>
+                    <input type="text" id="tanggalLahir" name="tanggalLahir" placeholder="Pilih Tanggal Lahir" required>
+                </div>
+                <button type="submit" class="btn">Periksa Kelulusan</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        © 2024 SD Negeri Kaliwining 03. Hak Cipta Dilindungi.
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/id.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            flatpickr("#tanggalLahir", {
+                dateFormat: "d F Y", // Format tanggal: 01 Januari 2010
+                locale: "id",       // Mengatur lokal ke Bahasa Indonesia
+                // Anda bisa menambahkan opsi lain di sini, contoh:
+                // maxDate: "today",
+                // minDate: "1990-01-01",
+                // defaultDate: "today"
+            });
+        });
+    </script>
+</body>
+</html>
