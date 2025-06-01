@@ -3,262 +3,718 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pengumuman Kelulusan SD Negeri Rambipuji 02</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@404,604&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_blue.css">
-
+    <title>Pengumuman Kelulusan - SD Negeri Rambipuji 02</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary-blue: #007bff; /* Example blue, adjust as needed */
-            --light-gray: #f8f9fa; /* Background color for input card */
-            --dark-text: #343a40;
-            --grid-line-color: rgba(0, 0, 0, 0.05); /* Light grid lines */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #e0f2f7; /* A light blue similar to the image background */
-            display: flex;
-            flex-direction: column;
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #6666cc 0%, #2d728f 100%);
             min-height: 100vh;
-            color: var(--dark-text);
-            /* Grid background pattern */
-            background-image:
-                linear-gradient(to right, var(--grid-line-color) 1px, transparent 1px),
-                linear-gradient(to bottom, var(--grid-line-color) 1px, transparent 1px);
-            background-size: 20px 20px; /* Adjust grid size as needed */
-        }
-
-        header {
-            text-align: center;
-            padding: 40px 20px 20px;
-        }
-
-        .logo-container {
-            width: 80px; /* Adjust size of the logo circle */
-            height: 80px;
-            background-color: white;
-            border-radius: 50%;
-            display: flex; /* Gunakan flexbox untuk memusatkan gambar di dalamnya */
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            overflow: hidden; /* Penting: Potong jika gambar melebihi batas lingkaran */
-        }
-
-        /* Hapus atau abaikan .logo-text jika Anda sudah menghapus elemennya di HTML */
-        /* .logo-text {
-            font-weight: 600;
-            font-size: 0.7em;
-            color: var(--primary-blue);
-            text-align: center;
-            line-height: 1.2;
-        } */
-
-        .logo-image { /* Gaya baru untuk gambar logo */
-            max-width: 100%;
-            max-height: 100%;
-            display: block;
-            object-fit: contain;
-            padding: 5px; /* Sesuaikan padding jika diperlukan agar logo pas di dalam lingkaran */
-        }
-
-        h1 {
-            font-size: 2.2em;
-            margin-bottom: 5px;
-            color: var(--dark-text);
-        }
-
-        h2 {
-            font-size: 1.2em;
-            font-weight: 400;
-            margin-top: 0;
-            color: #6c757d; /* Slightly muted text for the academic year */
-        }
-
-        main {
-            flex-grow: 1;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start; /* Align to top of the flex container */
             padding: 20px;
         }
 
-        .card {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 450px; /* Max width for desktop */
-            text-align: left;
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #dedada;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            overflow: hidden;
+            position: relative;
         }
 
-        .card h3 {
+        .header {
             text-align: center;
-            margin-bottom: 25px;
-            font-size: 1.3em;
-            color: var(--dark-text);
+            padding: 40px 20px 30px;
+            background: linear-gradient(135deg, #2d728f 0%, #6666cc 100%);
+            color: white;
+            position: relative;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #2d728f;
+            font-weight: 700;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .subtitle {
+            font-size: 16px;
+            opacity: 0.95;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .year {
+            font-size: 14px;
+            opacity: 0.85;
+            font-weight: 400;
+        }
+
+        .form-container {
+            padding: 40px 30px;
+            background: #dedada;
+        }
+
+        .form-title {
+            text-align: center;
+            font-size: 24px;
+            color: #2d728f;
+            margin-bottom: 30px;
+            font-weight: 700;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            position: relative;
         }
 
-        .form-group label {
+        .form-label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--dark-text);
+            font-weight: 600;
+            color: #2d728f;
+            font-size: 14px;
         }
 
-        .form-group input[type="text"],
-        .form-group .flatpickr-input { /* Apply the same styling to flatpickr input */
-            width: calc(100% - 20px); /* Account for padding */
-            padding: 12px 10px;
-            border: 1px solid #ced4da;
-            border-radius: 5px;
-            font-size: 1em;
-            box-sizing: border-box; /* Include padding in element's total width and height */
-            background-color: white; /* Ensure consistent background for Flatpickr */
-        }
-
-        .form-group input[type="text"]::placeholder {
-            color: #adb5bd;
-        }
-
-        .btn {
+        .form-input {
             width: 100%;
-            padding: 14px 20px;
-            background-color: #007bff; /* Primary blue button */
+            padding: 15px;
+            border: 2px solid #c0c0c0;
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #2d728f;
+            box-shadow: 0 0 0 3px rgba(45,114,143,0.1);
+        }
+
+        .autocomplete-container {
+            position: relative;
+        }
+
+        .suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 2px solid #c0c0c0;
+            border-top: none;
+            border-radius: 0 0 10px 10px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+        }
+
+        .suggestion-item {
+            padding: 12px 15px;
+            cursor: pointer;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background-color 0.2s ease;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+        }
+
+        .suggestion-item:hover,
+        .suggestion-item.highlighted {
+            background-color: #e8f4f8;
+            color: #2d728f;
+        }
+
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #ab3428 0%, #2d728f 100%);
             color: white;
             border: none;
-            border-radius: 5px;
-            font-size: 1.1em;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
-        .btn:hover {
-            background-color: #0056b3; /* Darker blue on hover */
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(171,52,40,0.3);
         }
 
-        footer {
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Celebration Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .celebration-card {
+            background: linear-gradient(135deg, #dedada 0%, white 100%);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
             text-align: center;
-            padding: 20px;
-            color: #6c757d;
-            font-size: 0.9em;
-            background-color: rgba(255, 255, 255, 0.5); /* Slightly transparent white for footer background */
-            margin-top: auto; /* Pushes footer to the bottom */
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            animation: celebrationSlide 0.6s ease;
+            overflow: hidden;
         }
 
-        /* Responsive adjustments */
+        .celebration-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(45,114,143,0.1), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        .celebration-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: bounce 1s infinite;
+        }
+
+        .celebration-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #2d728f;
+            margin-bottom: 15px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .student-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ab3428;
+            margin-bottom: 20px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .student-details {
+            background: rgba(45,114,143,0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: #2d728f;
+        }
+
+        .detail-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .congratulation-text {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+            font-weight: 500;
+            margin-bottom: 30px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .close-btn {
+            background: linear-gradient(135deg, #2d728f 0%, #ab3428 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-family: 'Montserrat', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Confetti Animation */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ab3428;
+            animation: confetti-fall 3s linear infinite;
+        }
+
+        .confetti:nth-child(2) { background: #2d728f; animation-delay: 0.1s; left: 10%; }
+        .confetti:nth-child(3) { background: #6666cc; animation-delay: 0.2s; left: 20%; }
+        .confetti:nth-child(4) { background: #ab3428; animation-delay: 0.3s; left: 30%; }
+        .confetti:nth-child(5) { background: #2d728f; animation-delay: 0.4s; left: 40%; }
+        .confetti:nth-child(6) { background: #6666cc; animation-delay: 0.5s; left: 50%; }
+        .confetti:nth-child(7) { background: #ab3428; animation-delay: 0.6s; left: 60%; }
+        .confetti:nth-child(8) { background: #2d728f; animation-delay: 0.7s; left: 70%; }
+        .confetti:nth-child(9) { background: #6666cc; animation-delay: 0.8s; left: 80%; }
+        .confetti:nth-child(10) { background: #ab3428; animation-delay: 0.9s; left: 90%; }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes celebrationSlide {
+            from { 
+                transform: scale(0.3) translateY(-100px);
+                opacity: 0;
+            }
+            to { 
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        @keyframes confetti-fall {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* Mobile Responsive */
         @media (max-width: 768px) {
-            h1 {
-                font-size: 1.8em;
+            body {
+                padding: 10px;
             }
 
-            h2 {
-                font-size: 1em;
+            .container {
+                border-radius: 15px;
             }
 
-            .card {
-                padding: 25px;
-                margin: 0 15px; /* Add some side margin on smaller screens */
+            .header {
+                padding: 30px 15px 25px;
             }
 
-            .logo-container { /* Sesuaikan ukuran container logo responsif */
-                width: 60px;
-                height: 60px;
+            .logo {
+                width: 70px;
+                height: 70px;
+                font-size: 20px;
             }
 
-            /* Hapus .logo-text jika Anda sudah menghapus elemennya di HTML */
-            /* .logo-text {
-                font-size: 0.6em;
-            } */
+            .title {
+                font-size: 24px;
+                letter-spacing: 1px;
+            }
+
+            .subtitle {
+                font-size: 14px;
+            }
+
+            .form-container {
+                padding: 30px 20px;
+            }
+
+            .form-title {
+                font-size: 20px;
+                margin-bottom: 25px;
+            }
+
+            .form-input {
+                padding: 12px;
+                font-size: 16px;
+            }
+
+            .submit-btn {
+                padding: 15px;
+                font-size: 16px;
+            }
+
+            .celebration-card {
+                padding: 30px 20px;
+                margin: 20px;
+            }
+
+            .celebration-icon {
+                font-size: 60px;
+            }
+
+            .celebration-title {
+                font-size: 24px;
+            }
+
+            .student-name {
+                font-size: 20px;
+            }
+
+            .congratulation-text {
+                font-size: 14px;
+            }
         }
 
         @media (max-width: 480px) {
-            header {
-                padding: 30px 15px 15px;
+            .header {
+                padding: 25px 10px 20px;
             }
 
-            h1 {
-                font-size: 1.5em;
+            .title {
+                font-size: 20px;
             }
 
-            h2 {
-                font-size: 0.9em;
+            .form-container {
+                padding: 25px 15px;
             }
 
-            .card {
-                padding: 20px;
+            .form-title {
+                font-size: 18px;
             }
 
-            .form-group label {
-                font-size: 0.95em;
+            .celebration-card {
+                padding: 25px 15px;
             }
 
-            .form-group input[type="text"],
-            .form-group .flatpickr-input {
-                padding: 10px;
-                font-size: 0.95em;
+            .celebration-icon {
+                font-size: 50px;
             }
 
-            .btn {
-                padding: 12px;
-                font-size: 1em;
+            .celebration-title {
+                font-size: 20px;
+            }
+
+            .student-name {
+                font-size: 18px;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="logo-container">
-            <img src="img/logo.png" alt="Logo SD Negeri Rambipuji 02" class="logo-image">
+    <div class="container">
+        <div class="header">
+            <div class="logo">🎓</div>
+            <h1 class="title">PENGUMUMAN KELULUSAN</h1>
+            <p class="subtitle">SD Negeri Rambipuji 02</p>
+            <p class="year">Tahun Ajaran 2024/2025</p>
         </div>
-        <h1>PENGUMUMAN KELULUSAN</h1>
-        <h2>SD Negeri Rambipuji 02<br>Tahun Ajaran 2024/2025</h2>
-    </header>
 
-    <main>
-        <div class="card">
-            <h3>Silakan Masukkan Data Diri</h3>
-            <form action="#" method="POST">
+        <div class="form-container">
+            <h2 class="form-title">Silakan Masukkan Data Diri</h2>
+            
+            <form id="graduationForm">
                 <div class="form-group">
-                    <label for="namaLengkap">Nama Lengkap</label>
-                    <input type="text" id="namaLengkap" name="namaLengkap" placeholder="Masukkan nama lengkap" required>
+                    <label for="namaLengkap" class="form-label">Nama Lengkap</label>
+                    <div class="autocomplete-container">
+                        <input 
+                            type="text" 
+                            id="namaLengkap" 
+                            name="namaLengkap" 
+                            class="form-input" 
+                            placeholder="Masukkan nama lengkap"
+                            autocomplete="off"
+                        >
+                        <div id="suggestions" class="suggestions"></div>
+                    </div>
                 </div>
+
                 <div class="form-group">
-                    <label for="tanggalLahir">Tanggal Lahir</label>
-                    <input type="text" id="tanggalLahir" name="tanggalLahir" placeholder="Pilih Tanggal Lahir" required>
+                    <label for="tanggalLahir" class="form-label">Tanggal Lahir</label>
+                    <input 
+                        type="date" 
+                        id="tanggalLahir" 
+                        name="tanggalLahir" 
+                        class="form-input"
+                        value="2025-06-12"
+                    >
                 </div>
-                <button type="submit" class="btn">Periksa Kelulusan</button>
+
+                <button type="submit" class="submit-btn">
+                    Periksa Kelulusan
+                </button>
             </form>
         </div>
-    </main>
+    </div>
 
-    <footer>
-        © 2024 SD Negeri Kaliwining 03. Hak Cipta Dilindungi.
-    </footer>
+    <!-- Celebration Modal -->
+    <div id="celebrationModal" class="modal-overlay">
+        <div class="celebration-card">
+            <div class="confetti"></div>
+            <div class="confetti"></div>
+            <div class="confetti"></div>
+            <div class="confetti"></div>
+            <div class="confetti"></div>
+            <div class="confetti"></div>
+            <div class="confetti"></div>
+            <div class="confetti"></div>
+            <div class="confetti"></div>
+            <div class="confetti"></div>
+            
+            <div class="celebration-icon">🎉</div>
+            <h2 class="celebration-title">SELAMAT!</h2>
+            <div class="student-name" id="studentName"></div>
+            
+            <div class="student-details">
+                <div class="detail-item">
+                    <span><strong>NISN:</strong></span>
+                    <span id="studentNISN"></span>
+                </div>
+                <div class="detail-item">
+                    <span><strong>Kelas:</strong></span>
+                    <span id="studentClass"></span>
+                </div>
+                <div class="detail-item">
+                    <span><strong>Status:</strong></span>
+                    <span style="color: #ab3428; font-weight: 700;">LULUS</span>
+                </div>
+            </div>
+            
+            <p class="congratulation-text" id="congratulationText"></p>
+            
+            <button class="close-btn" onclick="closeCelebration()">Tutup</button>
+        </div>
+    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/id.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            flatpickr("#tanggalLahir", {
-                dateFormat: "d F Y", // Format tanggal: 01 Januari 2010
-                locale: "id",       // Mengatur lokal ke Bahasa Indonesia
-                // Anda bisa menambahkan opsi lain di sini, contoh:
-                // maxDate: "today",
-                // minDate: "1990-01-01",
-                // defaultDate: "today"
-            });
+        // Array data siswa dengan NISN dan kelas
+        const siswaData = [
+            { nama: "Ahmad Rizki Pratama", nisn: "1234567890", kelas: "6A" },
+            { nama: "Siti Nur Aisyah", nisn: "1234567891", kelas: "6A" },
+            { nama: "Budi Santoso", nisn: "1234567892", kelas: "6B" },
+            { nama: "Dewi Sartika", nisn: "1234567893", kelas: "6B" },
+            { nama: "Eko Prasetyo", nisn: "1234567894", kelas: "6A" },
+            { nama: "Fitri Ramadhani", nisn: "1234567895", kelas: "6C" },
+            { nama: "Gilang Ramadhan", nisn: "1234567896", kelas: "6C" },
+            { nama: "Hani Nurhaliza", nisn: "1234567897", kelas: "6A" },
+            { nama: "Indra Gunawan", nisn: "1234567898", kelas: "6B" },
+            { nama: "Joko Widodo", nisn: "1234567899", kelas: "6B" },
+            { nama: "Kartika Sari", nisn: "1234567800", kelas: "6C" },
+            { nama: "Lestari Wulandari", nisn: "1234567801", kelas: "6C" },
+            { nama: "Muhammad Iqbal", nisn: "1234567802", kelas: "6A" },
+            { nama: "Nina Oktavia", nisn: "1234567803", kelas: "6A" },
+            { nama: "Oka Suryana", nisn: "1234567804", kelas: "6B" },
+            { nama: "Putri Maharani", nisn: "1234567805", kelas: "6B" },
+            { nama: "Qory Sandioriva", nisn: "1234567806", kelas: "6C" },
+            { nama: "Rahmat Hidayat", nisn: "1234567807", kelas: "6C" },
+            { nama: "Sari Dewi", nisn: "1234567808", kelas: "6A" },
+            { nama: "Taufik Rahman", nisn: "1234567809", kelas: "6A" },
+            { nama: "Ulfa Damayanti", nisn: "1234567810", kelas: "6B" },
+            { nama: "Vina Anggraini", nisn: "1234567811", kelas: "6B" },
+            { nama: "Wahyu Setiawan", nisn: "1234567812", kelas: "6C" },
+            { nama: "Ximena Putri", nisn: "1234567813", kelas: "6C" },
+            { nama: "Yudi Prasetya", nisn: "1234567814", kelas: "6A" },
+            { nama: "Zahra Aulia", nisn: "1234567815", kelas: "6A" },
+            { nama: "Andi Setiawan", nisn: "1234567816", kelas: "6B" },
+            { nama: "Bayu Satria", nisn: "1234567817", kelas: "6B" },
+            { nama: "Citra Maharani", nisn: "1234567818", kelas: "6C" },
+            { nama: "Dian Pertiwi", nisn: "1234567819", kelas: "6C" },
+            { nama: "Fajar Nugraha", nisn: "1234567820", kelas: "6A" },
+            { nama: "Gita Savitri", nisn: "1234567821", kelas: "6A" },
+            { nama: "Hendra Wijaya", nisn: "1234567822", kelas: "6B" },
+            { nama: "Ira Susanti", nisn: "1234567823", kelas: "6B" },
+            { nama: "Jihan Aulia", nisn: "1234567824", kelas: "6C" }
+        ];
+
+        const namaInput = document.getElementById('namaLengkap');
+        const suggestionsDiv = document.getElementById('suggestions');
+        let currentFocus = -1;
+
+        // Event listener untuk input
+        namaInput.addEventListener('input', function() {
+            const value = this.value.toLowerCase();
+            suggestionsDiv.innerHTML = '';
+            currentFocus = -1;
+
+            if (value.length === 0) {
+                suggestionsDiv.style.display = 'none';
+                return;
+            }
+
+            const filteredNames = siswaData.filter(siswa => 
+                siswa.nama.toLowerCase().includes(value)
+            );
+
+            if (filteredNames.length > 0) {
+                filteredNames.forEach((siswa, index) => {
+                    const div = document.createElement('div');
+                    div.className = 'suggestion-item';
+                    div.textContent = siswa.nama;
+                    div.addEventListener('click', function() {
+                        namaInput.value = siswa.nama;
+                        suggestionsDiv.style.display = 'none';
+                    });
+                    suggestionsDiv.appendChild(div);
+                });
+                suggestionsDiv.style.display = 'block';
+            } else {
+                suggestionsDiv.style.display = 'none';
+            }
+        });
+
+        // Event listener untuk keyboard navigation
+        namaInput.addEventListener('keydown', function(e) {
+            const suggestions = suggestionsDiv.getElementsByClassName('suggestion-item');
+            
+            if (e.keyCode === 40) { // Arrow Down
+                e.preventDefault();
+                currentFocus++;
+                addActive(suggestions);
+            } else if (e.keyCode === 38) { // Arrow Up
+                e.preventDefault();
+                currentFocus--;
+                addActive(suggestions);
+            } else if (e.keyCode === 13) { // Enter
+                e.preventDefault();
+                if (currentFocus > -1 && suggestions[currentFocus]) {
+                    suggestions[currentFocus].click();
+                }
+            } else if (e.keyCode === 27) { // Escape
+                suggestionsDiv.style.display = 'none';
+                currentFocus = -1;
+            }
+        });
+
+        function addActive(suggestions) {
+            if (!suggestions) return false;
+            removeActive(suggestions);
+            if (currentFocus >= suggestions.length) currentFocus = 0;
+            if (currentFocus < 0) currentFocus = suggestions.length - 1;
+            suggestions[currentFocus].classList.add('highlighted');
+        }
+
+        function removeActive(suggestions) {
+            for (let i = 0; i < suggestions.length; i++) {
+                suggestions[i].classList.remove('highlighted');
+            }
+        }
+
+        // Hide suggestions when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!namaInput.contains(e.target) && !suggestionsDiv.contains(e.target)) {
+                suggestionsDiv.style.display = 'none';
+            }
+        });
+
+        // Celebration function
+        function showCelebration(siswa) {
+            const modal = document.getElementById('celebrationModal');
+            const studentName = document.getElementById('studentName');
+            const studentNISN = document.getElementById('studentNISN');
+            const studentClass = document.getElementById('studentClass');
+            const congratulationText = document.getElementById('congratulationText');
+
+            studentName.textContent = siswa.nama;
+            studentNISN.textContent = siswa.nisn;
+            studentClass.textContent = siswa.kelas;
+            
+            const ucapanSelamat = `Dengan bangga kami umumkan bahwa ${siswa.nama} telah berhasil menyelesaikan pendidikan tingkat Sekolah Dasar dengan prestasi yang membanggakan. Semoga ilmu yang telah diperoleh menjadi bekal untuk meraih cita-cita yang lebih tinggi. Selamat atas pencapaian luar biasa ini dan semoga sukses selalu menyertai langkah-langkahmu di masa depan!`;
+            
+            congratulationText.textContent = ucapanSelamat;
+
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCelebration() {
+            const modal = document.getElementById('celebrationModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Form submission
+        document.getElementById('graduationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nama = namaInput.value.trim();
+            const tanggal = document.getElementById('tanggalLahir').value;
+            
+            if (!nama) {
+                alert('Silakan masukkan nama lengkap!');
+                return;
+            }
+            
+            if (!tanggal) {
+                alert('Silakan pilih tanggal lahir!');
+                return;
+            }
+            
+            // Cari siswa dalam database
+            const siswa = siswaData.find(s => s.nama.toLowerCase() === nama.toLowerCase());
+            
+            if (siswa) {
+                // Tampilkan animasi perayaan
+                setTimeout(() => {
+                    showCelebration(siswa);
+                }, 300);
+            } else {
+                alert(`Maaf, nama "${nama}" tidak ditemukan dalam daftar kelulusan. Silakan periksa kembali ejaan nama Anda.`);
+            }
+        });
+
+        // Close modal when clicking overlay
+        document.getElementById('celebrationModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeCelebration();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.keyCode === 27) { // Escape key
+                closeCelebration();
+            }
         });
     </script>
 </body>
