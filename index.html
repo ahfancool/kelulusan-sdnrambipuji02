@@ -6,6 +6,7 @@
     <title>Pengumuman Kelulusan - SD Negeri Rambipuji 02</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* General styles */
         * {
             margin: 0;
             padding: 0;
@@ -29,6 +30,7 @@
             position: relative;
         }
 
+        /* Header section styles */
         .header {
             text-align: center;
             padding: 40px 20px 30px;
@@ -46,16 +48,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            /* Removed font-size, color, font-weight as they are for text, not image */
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            overflow: hidden; /* Ensure image doesn't spill out if it's larger than the div */
+            overflow: hidden;
         }
 
         .logo img {
             max-width: 100%;
             max-height: 100%;
-            object-fit: contain; /* Ensures the image fits within the div while maintaining its aspect ratio */
-            border-radius: 50%; /* Makes the image itself also circular */
+            object-fit: contain;
+            border-radius: 50%;
         }
 
         .title {
@@ -79,6 +80,7 @@
             font-weight: 400;
         }
 
+        /* Form section styles */
         .form-container {
             padding: 40px 30px;
             background: #dedada;
@@ -184,6 +186,72 @@
 
         .submit-btn:active {
             transform: translateY(0);
+        }
+
+        /* Custom Message Box Styles */
+        .message-box-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10001;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .message-box-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .message-box-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 90%;
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+
+        .message-box-overlay.show .message-box-content {
+            transform: translateY(0);
+        }
+
+        .message-box-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+            color: #ab3428; /* Warna untuk ikon kesalahan */
+        }
+
+        .message-box-text {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .message-box-button {
+            background: linear-gradient(135deg, #2d728f 0%, #ab3428 100%);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .message-box-button:hover {
+            transform: scale(1.05);
         }
 
         /* Celebration Modal */
@@ -360,7 +428,6 @@
             .logo {
                 width: 70px;
                 height: 70px;
-                /* Removed font-size for text */
             }
 
             .title {
@@ -411,6 +478,10 @@
             .congratulation-text {
                 font-size: 14px;
             }
+
+            .message-box-content {
+                padding: 25px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -444,6 +515,10 @@
 
             .student-name {
                 font-size: 18px;
+            }
+
+            .message-box-content {
+                padding: 20px;
             }
         }
     </style>
@@ -485,7 +560,7 @@
                         id="tanggalLahir" 
                         name="tanggalLahir" 
                         class="form-input"
-                        value="2013-07-01"
+                        title="Masukkan tanggal lahir dalam format DD/MM/YYYY. Format tampilan mungkin bervariasi tergantung browser."
                     >
                 </div>
 
@@ -523,6 +598,10 @@
                     <span id="studentClass"></span>
                 </div>
                 <div class="detail-item">
+                    <span><strong>Tanggal Lahir:</strong></span>
+                    <span id="studentTanggalLahir"></span>
+                </div>
+                <div class="detail-item">
                     <span><strong>Status:</strong></span>
                     <span style="color: #ab3428; font-weight: 700;">LULUS</span>
                 </div>
@@ -534,124 +613,160 @@
         </div>
     </div>
 
+    <div id="messageBox" class="message-box-overlay">
+        <div class="message-box-content">
+            <div class="message-box-icon">⚠️</div>
+            <p class="message-box-text" id="messageBoxText"></p>
+            <button class="message-box-button" onclick="closeMessageBox()">OK</button>
+        </div>
+    </div>
+
     <script>
-        // Array data siswa dengan NISN dan kelas
+        // Array data siswa dengan NISN, kelas, dan TANGGAL LAHIR
+        // Format tanggal lahir harus YYYY-MM-DD untuk internal
         const siswaData = [
-            { nama: "ADYRA JUNEO SAVERO BASKORO", nisn: "3128141151", kelas: "6A" },
-            { nama: "ALVIANO DAVID PUTRA KADANIR", nisn: "0134210735", kelas: "6A" },
-            { nama: "ASYIQANA DZILQISTH", nisn: "0122479241", kelas: "6A" },
-            { nama: "AURA CINDY AULYA", nisn: "0121796594", kelas: "6A" },
-            { nama: "AZKI AL GIBRAN RAHMATULLAH PUTRA", nisn: "0129400978", kelas: "6A" },
-            { nama: "BHENAYA AL. FAIRUS", nisn: "0128037112", kelas: "6A" },
-            { nama: "DEWI BRILIAN WULANDARI AULIA PUTRI ASHARI", nisn: "0139242253", kelas: "6A" },
-            { nama: "FABRICIO AXELLE PUTRA AGAMI", nisn: "0122544399", kelas: "6A" },
-            { nama: "GHEFIRA TSABATA GHADAH", nisn: "3113746782", kelas: "6A" },
-            { nama: "GISELA ZAHRA RAMADHANI", nisn: "0127229751", kelas: "6A" },
-            { nama: "KAMILIA TALITA RAHMAN", nisn: "0134289941", kelas: "6A" },
-            { nama: "MIEKE AMELIA PUTRI", nisn: "0121647128", kelas: "6A" },
-            { nama: "MOCH. FATHIR MIRZA ALAMSYAH", nisn: "0126733281", kelas: "6A" },
-            { nama: "MOCHAMAD MARCELINO ALVARO", nisn: "0123593941", kelas: "6A" },
-            { nama: "MUCHAMMAD DZIKRI FAUZAN SAPUTRO", nisn: "0124421148", kelas: "6A" },
-            { nama: "MUHAMMAD NIZAM ABRORY", nisn: "0129265516", kelas: "6A" },
-            { nama: "MUHAMMAD YAFI MUSYAFFA GHAISANI", nisn: "0128312375", kelas: "6A" },
-            { nama: "NESHA PUTRI ARMADITA", nisn: "0124215512", kelas: "6A" },
-            { nama: "RADITYA NUR KHOIRULLAH", nisn: "0121529086", kelas: "6A" },
-            { nama: "RAFELLO DAMITRI RIZKI", nisn: "3124542020", kelas: "6A" },
-            { nama: "SATRIA DHARMA BHAKTI", nisn: "0126149866", kelas: "6A" },
-            { nama: "SYAFIQ FAHRI", nisn: "0121454468", kelas: "6A" },
-            { nama: "TASYA ASMARA DRIMAYANTI", nisn: "0133557533", kelas: "6A" },
-            { nama: "TEGAR PUTRA RINANDRO", nisn: "0119562643", kelas: "6A" },
-            { nama: "VANESA ADINDA PUTRI HARTONO", nisn: "3134362437", kelas: "6A" },
-            { nama: "VANESYA FIRDA ROSA", nisn: "0128924276", kelas: "6A" },
-            { nama: "ADITHA ZAHRA RESTI PRADITYA", nisn: "0125696841", kelas: "6B" },
-            { nama: "ADITYA WIDIANTO PRATAMA", nisn: "3122302037", kelas: "6B" },
-            { nama: "AISYAHRANI KARTIKA PUTRI WULANDARI", nisn: "0121474090", kelas: "6B" },
-            { nama: "ANARGYA BISMA RAHMAWADI", nisn: "0129741121", kelas: "6B" },
-            { nama: "ANNURA MUTIARA SYIFAQ", nisn: "3129481030", kelas: "6B" },
-            { nama: "AQILAH JIBRIL AL AWWABIN ANWAR", nisn: "0127163692", kelas: "6B" },
-            { nama: "ARI PUTRA DEWATA", nisn: "0115525054", kelas: "6B" },
-            { nama: "AZHAR RAIHAN HIBATULLAH", nisn: "0117826425", kelas: "6B" },
-            { nama: "AZKA SATRIA ARSYAD", nisn: "0128064237", kelas: "6B" },
-            { nama: "CASANDRA ROSYADI", nisn: "0122430289", kelas: "6B" },
-            { nama: "CHELO ONE MARFELINO", nisn: "0129573814", kelas: "6B" },
-            { nama: "CITRA ANANDA WIDYA NINGSIH", nisn: "0129606120", kelas: "6B" },
-            { nama: "DHAFIN WIJAYA ADITAMA", nisn: "3121001571", kelas: "6B" },
-            { nama: "ESHAL MALEEKA WAHYUDI", nisn: "0126847760", kelas: "6B" },
-            { nama: "FAZA ILYA MUZDALIFAH", nisn: "0139902905", kelas: "6B" },
-            { nama: "KIRANA SABIYA CALLYSTA", nisn: "0122264992", kelas: "6B" },
-            { nama: "MOCH. REVALDO FICKY PRATAMA", nisn: "0126549839", kelas: "6B" },
-            { nama: "MUH. AZAM PUTRA PRASETYA", nisn: "0124071863", kelas: "6B" },
-            { nama: "MUHAMMAD HAFIZ ASYHARI", nisn: "3123704840", kelas: "6B" },
-            { nama: "MUHAMMAD RIFKI HARIADI", nisn: "0124246932", kelas: "6B" },
-            { nama: "NADIA MEISIE PUTRI", nisn: "0139220349", kelas: "6B" },
-            { nama: "NADILA MEISIE PUTRI", nisn: "0132430776", kelas: "6B" },
-            { nama: "SALSABILLA NAESYA PUTRI", nisn: "3121169069", kelas: "6B" },
-            { nama: "SHERILL SALSABILLA NAWARRA", nisn: "0124342732", kelas: "6B" },
-            { nama: "SURYA ANUGERAH SUNARKO", nisn: "0121275764", kelas: "6B" },
-            { nama: "VINCENTIUS PETRA KRISNAYUARTHA", nisn: "0126509569", kelas: "6B" },
-            { nama: "ZAYDAH FARHATY KAMALAH", nisn: "0121654361", kelas: "6B" },
-            { nama: "A'ISYAH KAYLA AZZAHRA PUSPITA", nisn: "0139013722", kelas: "6C" },
-            { nama: "ABAEY BAHTIAR", nisn: "0128737492", kelas: "6C" },
-            { nama: "AINUN ACHMAD KHUZAINI", nisn: "0126023688", kelas: "6C" },
-            { nama: "ALFAN DWI ARI PRASETYA", nisn: "0113062030", kelas: "6C" },
-            { nama: "ANNISA PRAMADIAS JAN GALAS", nisn: "0134908599", kelas: "6C" },
-            { nama: "AURA MAHARANI", nisn: "0126184201", kelas: "6C" },
-            { nama: "CLEOPATRA FITRIA SAHRONI", nisn: "0122899431", kelas: "6C" },
-            { nama: "CZEIVAND AL LAZUARDI", nisn: "0131539639", kelas: "6C" },
-            { nama: "DEWA LASKAR LUCKY", nisn: "0129585713", kelas: "6C" },
-            { nama: "FAKHRIYAL AHMAD", nisn: "0133854428", kelas: "6C" },
-            { nama: "JANEETA RAHMA MAULIDA", nisn: "0137526076", kelas: "6C" },
-            { nama: "JULIO AISAR ARYA PUTRA", nisn: "0121613239", kelas: "6C" },
-            { nama: "KASYIFAH LATHOIFIR RAHMANIYYAH", nisn: "0137296268", kelas: "6C" },
-            { nama: "KAYLA AFIQAH KHAIRUNNISA", nisn: "0122827052", kelas: "6C" },
-            { nama: "LAILA ALI", nisn: "0128846478", kelas: "6C" },
-            { nama: "MEISYA BELLA", nisn: "0121012733", kelas: "6C" },
-            { nama: "MIKHAILA AVIVATUL AZIZAH", nisn: "0124627202", kelas: "6C" },
-            { nama: "MOCH. NIZAM EL FARABY", nisn: "0137500923", kelas: "6C" },
-            { nama: "MOH. FARIS ALFIANSYAH", nisn: "0128183073", kelas: "6C" },
-            { nama: "MUHAMMAD ALFIAN FAQHIH", nisn: "0132319795", kelas: "6C" },
-            { nama: "MUHAMMAD ASKA UBAIDILLAH HASAN", nisn: "0136462029", kelas: "6C" },
-            { nama: "MUHAMMAD RIZKY PUTRA RAMADHAN", nisn: "0123654834", kelas: "6C" },
-            { nama: "MUHAMMAD RIZQY NAUFAL WIJAYANTO", nisn: "0129324314", kelas: "6C" },
-            { nama: "NAJMAH MUSTIKA FA'IQOH", nisn: "0127887067", kelas: "6C" },
-            { nama: "RAFKA AHMAD PALEVI", nisn: "0124847091", kelas: "6C" },
-            { nama: "SAFIRA FEBRINA AZ ZAHRA", nisn: "0127571784", kelas: "6C" },
-            { nama: "TALITHA NAJMI FAKHIRAH", nisn: "0126195856", kelas: "6C" },
-            { nama: "VICKY ADITYA PUTRA", nisn: "0126538461", kelas: "6C" },
-            { nama: "ACHSAN RIZKI PRASETYO", nisn: "0128832124", kelas: "6D" },
-            { nama: "ANANTA SAFIRA DIAS IRAWAN", nisn: "3125964503", kelas: "6D" },
-            { nama: "ATIQAH ALYA KENZHA PERMANA", nisn: "0128215064", kelas: "6D" },
-            { nama: "CHELSEA OKTA SHARADOVA", nisn: "0123738229", kelas: "6D" },
-            { nama: "DAFFA GHAZIRUL KHAIR FIRZAUN", nisn: "0126930156", kelas: "6D" },
-            { nama: "DAFFA SEPTA SETIAWAN", nisn: "0122278727", kelas: "6D" },
-            { nama: "FARAH NASYWA PUTRI HARTONO", nisn: "0138447310", kelas: "6D" },
-            { nama: "GUNTUR MAULANA", nisn: "0127222953", kelas: "6D" },
-            { nama: "JESSICHA SEPTI NUR EMILIA", nisn: "3121134771", kelas: "6D" },
-            { nama: "LATISYA ADINDA PUTRI", nisn: "0127160668", kelas: "6D" },
-            { nama: "LUCKY KHANZA EKA MAJESTY", nisn: "0127429030", kelas: "6D" },
-            { nama: "M. AZKA DAFISA PUTRA", nisn: "0123362217", kelas: "6D" },
-            { nama: "MAULANA KAN'AM AL AFLAH", nisn: "0121121480", kelas: "6D" },
-            { nama: "MAUREEN SANIYAH PUTRI", nisn: "0126459112", kelas: "6D" },
-            { nama: "MIRZA ALKHALIFI RAYHAN", nisn: "3122076069", kelas: "6D" },
-            { nama: "MOCH. RASYIQUL ABID DZAKI ISLAMI", nisn: "0131873718", kelas: "6D" },
-            { nama: "MOCH. SABIRIL MUHTADIN", nisn: "0129199640", kelas: "6D" },
-            { nama: "MOHAMAD NAFI ISRAWAN", nisn: "0122509723", kelas: "6D" },
-            { nama: "MUH.FADHIL SAFIY'ALIMUR RAHMAN", nisn: "0122985102", kelas: "6D" },
-            { nama: "MUHAMMAD IRFAN ZAKI", nisn: "0124369203", kelas: "6D" },
-            { nama: "NAJWA ALLUZY", nisn: "0124929356", kelas: "6D" },
-            { nama: "NOER NAJWA KHAIRA", nisn: "0133669831", kelas: "6D" },
-            { nama: "QONITA AUFA ZAHRA", nisn: "0122531070", kelas: "6D" },
-            { nama: "RHAKA FAISAL HASNAIN", nisn: "3111988329", kelas: "6D" },
-            { nama: "SAIFULLAH YUSUF", nisn: "0134523832", kelas: "6D" },
-            { nama: "SHELLA DEWI FATIMATUZAHROH", nisn: "0128937006", kelas: "6D" },
-            { nama: "SITI MAYSYAH ISTIATUL NUR FITRO", nisn: "0129541602", kelas: "6D" },
+            { nama: "ADYRA JUNEO SAVERO BASKORO", nisn: "3128141151", kelas: "6A", tanggalLahir: "2012-06-15" },
+            { nama: "ALVIANO DAVID PUTRA KADANIR", nisn: "0134210735", kelas: "6A", tanggalLahir: "2012-12-19" },
+            { nama: "ASYIQANA DZILQISTH", nisn: "0122479241", kelas: "6A", tanggalLahir: "2012-09-21" },
+            { nama: "AURA CINDY AULYA", nisn: "0121796594", kelas: "6A", tanggalLahir: "2012-01-26" },
+            { nama: "AZKI AL GIBRAN RAHMATULLAH PUTRA", nisn: "0129400978", kelas: "6A", tanggalLahir: "2012-08-10" },
+            { nama: "BHENAYA AL. FAIRUS", nisn: "0128037112", kelas: "6A", tanggalLahir: "2012-02-10" },
+            { nama: "DEWI BRILIAN WULANDARI AULIA PUTRI ASHARI", nisn: "0139242253", kelas: "6A", tanggalLahir: "2013-02-05" },
+            { nama: "FABRICIO AXELLE PUTRA AGAMI", nisn: "0122544399", kelas: "6A", tanggalLahir: "2012-07-12" },
+            { nama: "GHEFIRA TSABATA GHADAH", nisn: "3113746782", kelas: "6A", tanggalLahir: "2011-12-03" },
+            { nama: "GISELA ZAHRA RAMADHANI", nisn: "0127229751", kelas: "6A", tanggalLahir: "2012-07-28" },
+            { nama: "KAMILIA TALITA RAHMAN", nisn: "0134289941", kelas: "6A", tanggalLahir: "2013-01-29" },
+            { nama: "MIEKE AMELIA PUTRI", nisn: "0121647128", kelas: "6A", tanggalLahir: "2012-05-01" },
+            { nama: "MOCH. FATHIR MIRZA ALAMSYAH", nisn: "0126733281", kelas: "6A", tanggalLahir: "2012-11-08" },
+            { nama: "MOCHAMAD MARCELINO ALVARO", nisn: "0123593941", kelas: "6A", tanggalLahir: "2012-11-06" },
+            { nama: "MUCHAMMAD DZIKRI FAUZAN SAPUTRO", nisn: "0124421148", kelas: "6A", tanggalLahir: "2012-04-25" },
+            { nama: "MUHAMMAD NIZAM ABRORY", nisn: "0129265516", kelas: "6A", tanggalLahir: "2012-11-14" },
+            { nama: "MUHAMMAD YAFI MUSYAFFA GHAISANI", nisn: "0128312375", kelas: "6A", tanggalLahir: "2012-06-30" },
+            { nama: "NESHA PUTRI ARMADITA", nisn: "0124215512", kelas: "6A", tanggalLahir: "2012-07-07" },
+            { nama: "RADITYA NUR KHOIRULLAH", nisn: "0121529086", kelas: "6A", tanggalLahir: "2012-04-15" },
+            { nama: "RAFELLO DAMITRI RIZKI", nisn: "3124542020", kelas: "6A", tanggalLahir: "2012-10-13" },
+            { nama: "SATRIA DHARMA BHAKTI", nisn: "0126149866", kelas: "6A", tanggalLahir: "2012-05-15" },
+            { nama: "SYAFIQ FAHRI", nisn: "0121454468", kelas: "6A", tanggalLahir: "2012-02-07" },
+            { nama: "TASYA ASMARA DRIMAYANTI", nisn: "0133557533", kelas: "6A", tanggalLahir: "2013-01-16" },
+            { nama: "TEGAR PUTRA RINANDRO", nisn: "0119562643", kelas: "6A", tanggalLahir: "2011-10-11" },
+            { nama: "VANESA ADINDA PUTRI HARTONO", nisn: "3134362437", kelas: "6A", tanggalLahir: "2013-03-03" },
+            { nama: "VANESYA FIRDA ROSA", nisn: "0128924276", kelas: "6A", tanggalLahir: "2012-07-11" },
+            { nama: "ADITHA ZAHRA RESTI PRADITYA", nisn: "0125696841", kelas: "6B", tanggalLahir: "2012-09-21" },
+            { nama: "ADITYA WIDIANTO PRATAMA", nisn: "3122302037", kelas: "6B", tanggalLahir: "2012-12-06" },
+            { nama: "AISYAHRANI KARTIKA PUTRI WULANDARI", nisn: "0121474090", kelas: "6B", tanggalLahir: "2012-12-25" },
+            { nama: "ANARGYA BISMA RAHMAWADI", nisn: "0129741121", kelas: "6B", tanggalLahir: "2012-10-07" },
+            { nama: "ANNURA MUTIARA SYIFAQ", nisn: "3129481030", kelas: "6B", tanggalLahir: "2012-05-27" },
+            { nama: "AQILAH JIBRIL AL AWWABIN ANWAR", nisn: "0127163692", kelas: "6B", tanggalLahir: "2012-10-21" },
+            { nama: "ARI PUTRA DEWATA", nisn: "0115525054", kelas: "6B", tanggalLahir: "2011-10-18" },
+            { nama: "AZHAR RAIHAN HIBATULLAH", nisn: "0117826425", kelas: "6B", tanggalLahir: "2011-12-19" },
+            { nama: "AZKA SATRIA ARSYAD", nisn: "0128064237", kelas: "6B", tanggalLahir: "2012-02-12" },
+            { nama: "CASANDRA ROSYADI", nisn: "0122430289", kelas: "6B", tanggalLahir: "2012-06-18" },
+            { nama: "CHELO ONE MARFELINO", nisn: "0129573814", kelas: "6B", tanggalLahir: "2012-02-06" },
+            { nama: "CITRA ANANDA WIDYA NINGSIH", nisn: "0129606120", kelas: "6B", tanggalLahir: "2012-02-06" },
+            { nama: "DHAFIN WIJAYA ADITAMA", nisn: "3121001571", kelas: "6B", tanggalLahir: "2012-07-19" },
+            { nama: "ESHAL MALEEKA WAHYUDI", nisn: "0126847760", kelas: "6B", tanggalLahir: "2012-12-12" },
+            { nama: "FAZA ILYA MUZDALIFAH", nisn: "0139902905", kelas: "6B", tanggalLahir: "2013-03-06" },
+            { nama: "KIRANA SABIYA CALLYSTA", nisn: "0122264992", kelas: "6B", tanggalLahir: "2012-10-30" },
+            { nama: "MOCH. REVALDO FICKY PRATAMA", nisn: "0126549839", kelas: "6B", tanggalLahir: "2012-03-14" },
+            { nama: "MUH. AZAM PUTRA PRASETYA", nisn: "0124071863", kelas: "6B", tanggalLahir: "2012-11-08" },
+            { nama: "MUHAMMAD HAFIZ ASYHARI", nisn: "3123704840", kelas: "6B", tanggalLahir: "2012-11-26" },
+            { nama: "MUHAMMAD RIFKI HARIADI", nisn: "0124246932", kelas: "6B", tanggalLahir: "2012-03-06" },
+            { nama: "NADIA MEISIE PUTRI", nisn: "0139220349", kelas: "6B", tanggalLahir: "2013-05-02" },
+            { nama: "NADILA MEISIE PUTRI", nisn: "0132430776", kelas: "6B", tanggalLahir: "2013-05-02" },
+            { nama: "SALSABILLA NAESYA PUTRI", nisn: "3121169069", kelas: "6B", tanggalLahir: "2012-12-06" },
+            { nama: "SHERILL SALSABILLA NAWARRA", nisn: "0124342732", kelas: "6B", tanggalLahir: "2012-06-12" },
+            { nama: "SURYA ANUGERAH SUNARKO", nisn: "0121275764", kelas: "6B", tanggalLahir: "2012-04-05" },
+            { nama: "VINCENTIUS PETRA KRISNAYUARTHA", nisn: "0126509569", kelas: "6B", tanggalLahir: "2012-08-31" },
+            { nama: "ZAYDAH FARHATY KAMALAH", nisn: "0121654361", kelas: "6B", tanggalLahir: "2012-09-26" },
+            { nama: "A'ISYAH KAYLA AZZAHRA PUSPITA", nisn: "0139013722", kelas: "6C", tanggalLahir: "2013-05-24" },
+            { nama: "ABAEY BAHTIAR", nisn: "0128737492", kelas: "6C", tanggalLahir: "2012-03-14" },
+            { nama: "AINUN ACHMAD HUZZAINI", nisn: "0126023688", kelas: "6C", tanggalLahir: "2012-04-01" },
+            { nama: "ALFAN DWI ARI PRASETYA", nisn: "0113062030", kelas: "6C", tanggalLahir: "2011-12-29" },
+            { nama: "ANNISA PRAMADIAS JAN GALAS", nisn: "0134908599", kelas: "6C", tanggalLahir: "2013-01-04" },
+            { nama: "AURA MAHARANI", nisn: "0126184201", kelas: "6C", tanggalLahir: "2012-11-28" },
+            { nama: "CLEOPATRA FITRIA SAHRONI", nisn: "0122899431", kelas: "6C", tanggalLahir: "2012-05-19" },
+            { nama: "CZEIVAND AL LAZUARDI", nisn: "0131539639", kelas: "6C", tanggalLahir: "2013-03-22" },
+            { nama: "DEWA LASKAR LUCKY", nisn: "0129585713", kelas: "6C", tanggalLahir: "2012-11-06" },
+            { nama: "FAKHRIYAL AHMAD", nisn: "0133854428", kelas: "6C", tanggalLahir: "2013-02-04" },
+            { nama: "JANEETA RAHMA MAULIDA", nisn: "0137526076", kelas: "6C", tanggalLahir: "2013-01-24" },
+            { nama: "JULIO AISAR ARYA PUTRA", nisn: "0121613239", kelas: "6C", tanggalLahir: "2012-07-05" },
+            { nama: "KASYIFAH LATHOIFIR RAHMANIYYAH", nisn: "0137296268", kelas: "6C", tanggalLahir: "2013-03-27" },
+            { nama: "KAYLA AFIQAH KHAIRUNNISA", nisn: "0122827052", kelas: "6C", tanggalLahir: "2012-11-18" },
+            { nama: "LAILA ALI", nisn: "0128846478", kelas: "6C", tanggalLahir: "2012-08-16" },
+            { nama: "MEISYA BELLA", nisn: "0121012733", kelas: "6C", tanggalLahir: "2012-05-09" },
+            { nama: "MIKHAILA AVIVATUL AZIZAH", nisn: "0124627202", kelas: "6C", tanggalLahir: "2012-08-20" },
+            { nama: "MOCH. NIZAM EL FARABY", nisn: "0137500923", kelas: "6C", tanggalLahir: "2013-04-24" },
+            { nama: "MOH. FARIS ALFIANSYAH", nisn: "0128183073", kelas: "6C", tanggalLahir: "2012-07-04" },
+            { nama: "MUHAMMAD ALFIAN FAQHIH", nisn: "0132319795", kelas: "6C", tanggalLahir: "2013-01-14" },
+            { nama: "MUHAMMAD ASKA UBAIDILLAH HASAN", nisn: "0136462029", kelas: "6C", tanggalLahir: "2013-01-03" },
+            { nama: "MUHAMMAD RIZKY PUTRA RAMADHAN", nisn: "0123654834", kelas: "6C", tanggalLahir: "2012-08-02" },
+            { nama: "MUHAMMAD RIZQY NAUFAL WIJAYANTO", nisn: "0129324314", kelas: "6C", tanggalLahir: "2012-07-15" },
+            { nama: "NAJMAH MUSTIKA FA'IQOH", nisn: "0127887067", kelas: "6C", tanggalLahir: "2012-05-01" },
+            { nama: "RAFKA AHMAD PAHLEVI", nisn: "0124847091", kelas: "6C", tanggalLahir: "2012-10-21" },
+            { nama: "SAFIRA FEBRINA AZ ZAHRA", nisn: "0127571784", kelas: "6C", tanggalLahir: "2012-02-19" },
+            { nama: "TALITHA NAJMI FAKHIRAH", nisn: "0126195856", kelas: "6C", tanggalLahir: "2012-08-29" },
+            { nama: "VICKY ADITYA PUTRA", nisn: "0126538461", kelas: "6C", tanggalLahir: "2012-05-17" },
+            { nama: "ACHSAN RIZKI PRASETYO", nisn: "0128832124", kelas: "6D", tanggalLahir: "2012-12-07" },
+            { nama: "ANANTA SAFIRA DIAS IRAWAN", nisn: "3125964503", kelas: "6D", tanggalLahir: "2012-09-09" },
+            { nama: "ATIQAH ALYA KENZHA PERMANA", nisn: "0128215064", kelas: "6D", tanggalLahir: "2012-08-12" },
+            { nama: "CHELSEA OKTA SHARADOVA", nisn: "0123738229", kelas: "6D", tanggalLahir: "2012-10-07" },
+            { nama: "DAFFA GHAZIRUL KHAIR FIRZAUN", nisn: "0126930156", kelas: "6D", tanggalLahir: "2012-09-30" },
+            { nama: "DAFFA SEPTA SETIAWAN", nisn: "0122278727", kelas: "6D", tanggalLahir: "2012-09-21" },
+            { nama: "FARAH NASYWA PUTRI HARTONO", nisn: "0138447310", kelas: "6D", tanggalLahir: "2013-04-08" },
+            { nama: "GUNTUR MAULANA", nisn: "0127222953", kelas: "6D", tanggalLahir: "2012-11-06" },
+            { nama: "JESSICHA SEPTI NUR EMILIA", nisn: "3121134771", kelas: "6D", tanggalLahir: "2012-09-15" },
+            { nama: "LATISYA ADINDA PUTRI", nisn: "0127160668", kelas: "6D", tanggalLahir: "2012-09-10" },
+            { nama: "LUCKY KHANZA EKA MAJESTY", nisn: "0127429030", kelas: "6D", tanggalLahir: "2012-09-14" },
+            { nama: "M. AZKA DAFISA PUTRA", nisn: "0123362217", kelas: "6D", tanggalLahir: "2012-09-05" },
+            { nama: "MAULANA KAN'AM AL AFLAH", nisn: "0121121480", kelas: "6D", tanggalLahir: "2012-06-21" },
+            { nama: "MAUREEN SANIYAH PUTRI", nisn: "0126459112", kelas: "6D", tanggalLahir: "2012-06-28" },
+            { nama: "MIRZA ALKHALIFI RAYHAN", nisn: "3122076069", kelas: "6D", tanggalLahir: "2012-04-16" },
+            { nama: "MOCH. RASYIQUL ABID DZAKI ISLAMI", nisn: "0131873718", kelas: "6D", tanggalLahir: "2013-07-03" },
+            { nama: "MOCH. SABIRIL MUHTADIN", nisn: "0129199640", kelas: "6D", tanggalLahir: "2012-10-05" },
+            { nama: "MOHAMAD NAFI ISRAWAN", nisn: "0122509723", kelas: "6D", tanggalLahir: "2012-03-26" },
+            { nama: "MUH.FADHIL SAFIY'ALIMUR RAHMAN", nisn: "0122985102", kelas: "6D", tanggalLahir: "2012-11-25" },
+            { nama: "MUHAMMAD IRFAN ZAKI", nisn: "0124369203", kelas: "6D", tanggalLahir: "2012-10-02" },
+            { nama: "NAJWA ALLUZY", nisn: "0124929356", kelas: "6D", tanggalLahir: "2012-08-02" },
+            { nama: "NOER NAJWA KHAIRA", nisn: "0133669831", kelas: "6D", tanggalLahir: "2013-04-12" },
+            { nama: "QONITA AUFA ZAHRA", nisn: "0122531070", kelas: "6D", tanggalLahir: "2012-10-09" },
+            { nama: "RHAKA FAISAL HASNAIN", nisn: "3111988329", kelas: "6D", tanggalLahir: "2012-12-17" },
+            { nama: "SAIFULLAH YUSUF", nisn: "0134523832", kelas: "6D", tanggalLahir: "2013-06-18" },
+            { nama: "SHELLA DEWI FATIMATUZAHROH", nisn: "0128937006", kelas: "6D", tanggalLahir: "2012-04-17" },
+            { nama: "SITI MAYSYAH ISTIATUL NUR FITRO", nisn: "0129541602", kelas: "6D", tanggalLahir: "2012-05-27" },
         ];
 
         const namaInput = document.getElementById('namaLengkap');
+        const tanggalInput = document.getElementById('tanggalLahir'); // Get the date input element
         const suggestionsDiv = document.getElementById('suggestions');
         let currentFocus = -1;
 
-        // Event listener untuk input
+        // Function to show custom message box
+        function showMessageBox(message) {
+            const messageBox = document.getElementById('messageBox');
+            const messageBoxText = document.getElementById('messageBoxText');
+            messageBoxText.textContent = message;
+            messageBox.classList.add('show');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+
+        // Function to close custom message box
+        function closeMessageBox() {
+            const messageBox = document.getElementById('messageBox');
+            messageBox.classList.remove('show');
+            document.body.style.overflow = 'auto'; // Allow scrolling
+        }
+
+        // Function to format date string from YYYY-MM-DD to DD/MM/YYYY for display
+        function formatDateForDisplay(dateString) {
+            if (!dateString) return '';
+            const parts = dateString.split('-'); // YYYY-MM-DD
+            if (parts.length === 3) {
+                return `${parts[2]}/${parts[1]}/${parts[0]}`; // DD/MM/YYYY
+            }
+            return dateString; // Return as is if format is unexpected
+        }
+
+        // Event listener for input (namaLengkap) for autocomplete
         namaInput.addEventListener('input', function() {
             const value = this.value.toLowerCase();
             suggestionsDiv.innerHTML = '';
@@ -683,7 +798,7 @@
             }
         });
 
-        // Event listener untuk keyboard navigation
+        // Event listener for keyboard navigation for autocomplete
         namaInput.addEventListener('keydown', function(e) {
             const suggestions = suggestionsDiv.getElementsByClassName('suggestion-item');
             
@@ -733,11 +848,14 @@
             const studentName = document.getElementById('studentName');
             const studentNISN = document.getElementById('studentNISN');
             const studentClass = document.getElementById('studentClass');
+            const studentTanggalLahir = document.getElementById('studentTanggalLahir');
             const congratulationText = document.getElementById('congratulationText');
 
             studentName.textContent = siswa.nama;
             studentNISN.textContent = siswa.nisn;
             studentClass.textContent = siswa.kelas;
+            // Format tanggal lahir untuk tampilan di modal
+            studentTanggalLahir.textContent = formatDateForDisplay(siswa.tanggalLahir);
             
             const ucapanSelamat = `Dengan bangga kami umumkan bahwa ${siswa.nama} telah berhasil menyelesaikan pendidikan tingkat Sekolah Dasar dengan prestasi yang membanggakan. Semoga ilmu yang telah diperoleh menjadi bekal untuk meraih cita-cita yang lebih tinggi. Selamat atas pencapaian luar biasa ini dan semoga sukses selalu menyertai langkah-langkahmu di masa depan!`;
             
@@ -758,23 +876,24 @@
             e.preventDefault();
             
             const nama = namaInput.value.trim();
-            const tanggal = document.getElementById('tanggalLahir').value;
+            // Nilai dari input type="date" selalu YYYY-MM-DD
+            const tanggal = tanggalInput.value; 
             
             if (!nama) {
-                // Replaced alert with a custom message box or modal for better UX
-                // For this example, I'll use a simple console.log, but in a real app, you'd show a modal
-                console.error('Silakan masukkan nama lengkap!');
+                showMessageBox('Silakan masukkan nama lengkap!');
                 return;
             }
             
             if (!tanggal) {
-                // Replaced alert with a custom message box or modal for better UX
-                console.error('Silakan pilih tanggal lahir!');
+                showMessageBox('Silakan pilih tanggal lahir!');
                 return;
             }
             
-            // Cari siswa dalam database
-            const siswa = siswaData.find(s => s.nama.toLowerCase() === nama.toLowerCase());
+            // Cari siswa dalam database berdasarkan nama DAN tanggal lahir
+            const siswa = siswaData.find(s => 
+                s.nama.toLowerCase() === nama.toLowerCase() && 
+                s.tanggalLahir === tanggal
+            );
             
             if (siswa) {
                 // Tampilkan animasi perayaan
@@ -782,8 +901,8 @@
                     showCelebration(siswa);
                 }, 300);
             } else {
-                // Replaced alert with a custom message box or modal for better UX
-                console.error(`Maaf, nama "${nama}" tidak ditemukan dalam daftar kelulusan. Silakan periksa kembali ejaan nama Anda.`);
+                // Tampilkan pesan kesalahan jika nama atau tanggal lahir salah
+                showMessageBox(`Maaf, kombinasi nama "${nama}" dan tanggal lahir yang Anda masukkan tidak ditemukan dalam daftar kelulusan. Silakan periksa kembali data Anda.`);
             }
         });
 
@@ -798,6 +917,7 @@
         document.addEventListener('keydown', function(e) {
             if (e.keyCode === 27) { // Escape key
                 closeCelebration();
+                closeMessageBox(); // Juga tutup pesan kesalahan jika terbuka
             }
         });
     </script>
